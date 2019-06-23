@@ -11,8 +11,8 @@ Klikamy na **Next: Configure Instance Details**, zostawiamy wszystkie pola z dom
 Teraz możemy kliknąć w **Review and launch**, a następnie **Launch**. Pojawi nam się okienko, w którym będziemy musieli utworzyć, lub wybrać aktualną parę kluczy, która będzie użyta do łączenia się z instancją przez SSH. Wybieramy z listy **Create a new key pair**, wpisujemy jej nazwę, np. "Webserver Keypair" i klikamy na przycisk **Download Key Pair**. Zapisujemy plik w wybranej przez nas lokalizacji, jednak należy oczywiście pamiętać gdzie go zapisujemy, bo inaczej nie połączymy się z instancją. Teraz wreszcie możemy kliknąć **Launch Instances** i proces tworzenia instancji zostanie rozpoczęty. Zwykle trwa on kilka minut.
 
 {% hint style="warning" %}
-Jeśli przy próbie utworzenia nowej instancji EC2 pokazuje się błąd "Launch failed" i opis błędu mówi coś o weryfikacji konta/requestu - nie przejmuj się, tak czasem się może zdarzyć przy nowych kontach. Z reguły po kilku - kilkunastu minutach powinieneś trzymać maila od Amazonu, że wszystko jest w porządku i twoje konto jest w pełni zwerfikowane.  
-Jednakże jeśli w ciągu 4 godzin nie dostaniesz maila, warto napisać do supportu i zapytać jaki jest status Twojego konta.
+Jeśli przy próbie utworzenia nowej instancji EC2 pokazuje się błąd "Launch failed" i opis błędu mówi coś o weryfikacji konta/requestu - nie przejmuj się, tak czasem się może zdarzyć przy nowych kontach. Z reguły po kilku - kilkunastu minutach powinieneś otrzymać maila od Amazonu, że wszystko jest w porządku i twoje konto jest w pełni zweryfikowane.  
+Jednakże jeśli w ciągu 4 godzin nie dostaniesz maila, warto napisać do supportu i zapytać, jaki jest status Twojego konta.
 {% endhint %}
 
 #### Łączymy się przez SSH
