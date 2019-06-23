@@ -21,3 +21,16 @@ Jednakże jeśli w ciągu 4 godzin nie dostaniesz maila, warto napisać do suppo
 
 #### Instalacja Apache
 
+Aby zainstalować serwer **Apache**, musimy najpierw połączyć się z naszą nowo utworzoną instancją. W tym celu otwórz linię poleceń, przejdź do katalogu, w którym zapisany jest plik klucza, który przed momentem ściągnąłeś i wykonaj polecenie `chmod 400 [nazwaKlucza].pem`.  
+W konsoli AWS przejdź do EC2, z menu po lewej wybierz **Instances**. Pojawi się nam nasza instancja. Jeśli nie jest zaznaczona, zaznacz checkbox \(pierwsza ikonka po lewej stronie\). Na dole ekranu pojawią się pewne informacje dotyczące naszej instancji. Nas w tym momencie interesuje tak naprawdę tylko pole **Public DNS \(IPv4\)**. Skopiuj jego zawartość i otwórz ponownie okno terminala. Teraz wykonaj następującą komendę:
+
+`ssh -i "[nazwaKlucza].pem" ubuntu@[tutaj-wklej-adres-ip-ktory wlasnie-skopiowales]`
+
+W tym momencie powinniśmy uzyskać połączenie z instancją.
+
+{% hint style="warning" %}
+Jeżeli wyświetla Ci się błąd, który mówi coś o "**Too many authentication failures**", przejdź do katalogu, w którym znajduje się klucz i wykonaj poniższą komendę:  
+  
+`ssh-add [nazwaKlucza].pem`
+{% endhint %}
+
