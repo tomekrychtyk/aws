@@ -37,5 +37,5 @@ Jeżeli wyświetla Ci się błąd, który mówi coś o "**Too many authenticatio
 #### Instalacja Apache
 
 Kiedy już uda nam się połączyć z naszą instancją, jesteśmy gotowi na instalację serwera. W tym celu najpierw wykonujemy komendę `sudo -s` aby uzyskać prawa administratora, następnie `apt-get update` i finalnie `apt-get install apache2`.  
-Po zakończeniu procesu instalacji odpalamy przeglądarkę i jako URL podajemy ponownie adres, który wcześniej skopiowaliśmy w konsoli EC2, w polu **Public DNS \(IPv4\)**. Powinniśmy w ten sposób ujrzeć domyślną stronę wygenerowaną przez Apache.
+Po zakończeniu procesu instalacji odpalamy przeglądarkę i jako URL podajemy ponownie adres, który wcześniej skopiowaliśmy w konsoli EC2, z pola **Public DNS \(IPv4\)**. Powinniśmy w ten sposób ujrzeć domyślną stronę wygenerowaną przez Apache o tytule **Apache2 Ubuntu Default Page** \(lub coś w tym rodzaju\).
 
