@@ -2,7 +2,7 @@
 description: 'Koszt: ok. $0.5 / miesiąc (AWS free tier)'
 ---
 
-# WebServer na EC2, Elastic Load Balancer i Route53
+# Serwer WWW na EC2, Elastic Load Balancer i Route53
 
 ### Wprowadzenie
 
