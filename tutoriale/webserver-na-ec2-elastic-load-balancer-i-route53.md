@@ -19,7 +19,7 @@ Jeśli przy próbie utworzenia nowej instancji EC2 pokazuje się błąd "Launch 
 Jednakże jeśli w ciągu 4 godzin nie dostaniesz maila, warto napisać do supportu i zapytać jaki jest status Twojego konta.
 {% endhint %}
 
-#### Instalacja Apache
+#### Łączymy się przez SSH
 
 Aby zainstalować serwer **Apache**, musimy najpierw połączyć się z naszą nowo utworzoną instancją. W tym celu otwórz linię poleceń, przejdź do katalogu, w którym zapisany jest plik klucza, który przed momentem ściągnąłeś i wykonaj polecenie `chmod 400 [nazwaKlucza].pem`.  
 W konsoli AWS przejdź do EC2, z menu po lewej wybierz **Instances**. Pojawi się nam nasza instancja. Jeśli nie jest zaznaczona, zaznacz checkbox \(pierwsza ikonka po lewej stronie\). Na dole ekranu pojawią się pewne informacje dotyczące naszej instancji. Nas w tym momencie interesuje tak naprawdę tylko pole **Public DNS \(IPv4\)**. Skopiuj jego zawartość i otwórz ponownie okno terminala. Teraz wykonaj następującą komendę:
@@ -33,4 +33,9 @@ Jeżeli wyświetla Ci się błąd, który mówi coś o "**Too many authenticatio
   
 `ssh-add [nazwaKlucza].pem`
 {% endhint %}
+
+#### Instalacja Apache
+
+Kiedy już uda nam się połączyć z naszą instancją, jesteśmy gotowi na instalację serwera. W tym celu najpierw wykonujemy komendę `sudo -s` aby uzyskać prawa administratora, następnie `apt-get update` i finalnie `apt-get install apache2`.  
+Po zakończeniu procesu instalacji odpalamy przeglądarkę i jako URL podajemy ponownie adres, który wcześniej skopiowaliśmy w konsoli EC2, w polu **Public DNS \(IPv4\)**. Powinniśmy w ten sposób ujrzeć domyślną stronę wygenerowaną przez Apache.
 
