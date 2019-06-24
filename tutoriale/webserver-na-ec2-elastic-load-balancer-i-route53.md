@@ -35,3 +35,24 @@ Jeżeli wyświetla Ci się błąd, który mówi coś o "**Too many authenticatio
 Kiedy już uda nam się połączyć z naszą instancją, jesteśmy gotowi na instalację serwera. W tym celu najpierw wykonujemy komendę `sudo -s` aby uzyskać prawa administratora, następnie `apt-get update` i finalnie `apt-get install apache2`.  
 Po zakończeniu procesu instalacji odpalamy przeglądarkę i jako URL podajemy ponownie adres, który wcześniej skopiowaliśmy w konsoli EC2, z pola **Public DNS \(IPv4\)**. Powinniśmy w ten sposób ujrzeć domyślną stronę wygenerowaną przez Apache o tytule **Apache2 Ubuntu Default Page** \(lub coś w tym rodzaju\).
 
+### Elastic Load Balancer
+
+Może na początku wyjaśnię krótko czym jest **load balancer**. Jak sama nazwa wskazuje load balancer w pewnym sensie balansować obłożenie i dystrybuować je na różne serwery, instancje EC2, lambdy itd. Powiedzmy, że mamy kilka web serwerów i chcemy rozłożyć na nich po równo obciążenie. W takim właśnie przypadku świetnie spradzi się load balancer.
+
+{% hint style="info" %}
+Elastic Load Balancer występuje w trzech typach
+
+* **Application Load Balancer** - działa na siódmej warswie modelu OSI, czyli warstwie aplikacji \([tutaj](https://pl.wikipedia.org/wiki/Model_OSI) znajdziesz więcej informacji na temat modelu OSI\). Jest używany do kontroli ruchu głównie na protokołach HTTP i HTTPS. Pozwalają na stworzenie zaawansowanych reguł routingu, kierując różne rodzaje requestów do różnych serwerów, lub grup serwerów.
+* **Network Load Balancer** - działa na warswie czwartej OSI. Używany w systemach wymagających bardzo dużej wydajności - jest w stanie obsłużyć milion zapytań na sekundę. Jest to najdroższy, ale i najwydajniejszy load balancer.
+* **Classic Load Balancer** - generalnie jego użycie nie jest już zalecane przez AWS. 
+{% endhint %}
+
+Aby utworzyć nowy load balancer, logujemy się do konsoli, następnie przechodzimy do EC2 i z menu po lewej stronie wybieramy **Load Balancers** z podgrupy **LOAD BALANCING**. Klikamy przycisk Create Load Balancer, a następnie wybieramy Application Load Balancer. W polu **Name** należy podać jakąś nazwę balancera, np. "WebserverALB".  
+W sekcji **Listeners** wybieramy na jakich portach nasz load balancer ma nasłuchiwać i reagować na nadchodzące requesty. Domyślnie będzie tam port 80 dla protokołu HTTP. Możemy dodać tutaj również HTTPS - w tym celu klikamy na **Add Listener** i wybieramy odpowiedni protokół z listy.  
+Następnie zaznaczamy wszystkie **Availability Zones** i klikamy na **Next: Configure Security Settings**.  
+Jeżeli nie dodałeś listenera do SSL, zobaczysz prawdopodobnie tegu typu ostrzeżenie:
+
+![](../.gitbook/assets/screenshot-from-2019-06-24-11-07-17.png)
+
+
+
