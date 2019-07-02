@@ -35,6 +35,12 @@ Jeżeli wyświetla Ci się błąd, który mówi coś o "**Too many authenticatio
 Kiedy już uda nam się połączyć z naszą instancją, jesteśmy gotowi na instalację serwera. W tym celu najpierw wykonujemy komendę `sudo -s` aby uzyskać prawa administratora, następnie `apt-get update` i finalnie `apt-get install apache2`.  
 Po zakończeniu procesu instalacji odpalamy przeglądarkę i jako URL podajemy ponownie adres, który wcześniej skopiowaliśmy w konsoli EC2, z pola **Public DNS \(IPv4\)**. Powinniśmy w ten sposób ujrzeć domyślną stronę wygenerowaną przez Apache o tytule **Apache2 Ubuntu Default Page** \(lub coś w tym rodzaju\).
 
+### Route53
+
+Czas na podpięcie naszej domeny pod skrzydła AWS. Aby skierować domenę zakupioną u zewnętrznego dostawcy \(w tym przykładzie, jak już wspomniałem na początku, będzie [domeny.pl](http://domeny.pl)\) musimy mieć rzecz jasna dostęp do panelu kontrolnego domeny.
+
+Ale po kolei. Po pierwsze logujemy się do konsoli AWS i przechodzimy do serwisu o nazwie Route53. Jeżeli do tej pory nie dotykaliśmy jeszcze tego sewisu powinna pojawić nam się strona startowa, z której wybieramy **DNS Management** poprzed kliknięcie odpowiedniego przycisku **Get Started Now**. Tutaj dostaniemy pobieżnie kilka najważniejszych informacji czym w zasadzie jest Route53 \(aczkolwiek warto się z nimi zapoznać, potrwa to góra pół minuty\). Klikamy przycisk Create Hosted Zone. Jest to w pewnym sensie kontener, w którym będą przechowywane przeróżne rekordy DNS i inne ważne informacje dotyczące konkretnej domeny.
+
 ### Elastic Load Balancer
 
 Może na początku wyjaśnię krótko czym jest **load balancer**. Jak sama nazwa wskazuje load balancer w pewnym sensie balansować obłożenie i dystrybuować je na różne serwery, instancje EC2, lambdy itd. Powiedzmy, że mamy kilka web serwerów i chcemy rozłożyć na nich po równo obciążenie. W takim właśnie przypadku świetnie spradzi się load balancer.
