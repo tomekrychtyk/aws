@@ -39,7 +39,23 @@ Po zakończeniu procesu instalacji odpalamy przeglądarkę i jako URL podajemy p
 
 Czas na podpięcie naszej domeny pod skrzydła AWS. Aby skierować domenę zakupioną u zewnętrznego dostawcy \(w tym przykładzie, jak już wspomniałem na początku, będzie [domeny.pl](http://domeny.pl)\) musimy mieć rzecz jasna dostęp do panelu kontrolnego domeny.
 
-Ale po kolei. Po pierwsze logujemy się do konsoli AWS i przechodzimy do serwisu o nazwie Route53. Jeżeli do tej pory nie dotykaliśmy jeszcze tego sewisu powinna pojawić nam się strona startowa, z której wybieramy **DNS Management** poprzed kliknięcie odpowiedniego przycisku **Get Started Now**. Tutaj dostaniemy pobieżnie kilka najważniejszych informacji czym w zasadzie jest Route53 \(aczkolwiek warto się z nimi zapoznać, potrwa to góra pół minuty\). Klikamy przycisk Create Hosted Zone. Jest to w pewnym sensie kontener, w którym będą przechowywane przeróżne rekordy DNS i inne ważne informacje dotyczące konkretnej domeny.
+Ale po kolei. Po pierwsze logujemy się do konsoli AWS i przechodzimy do serwisu o nazwie **Route53**. Jeżeli do tej pory nie odwiedzaliśmy jeszcze tego miejsca powinna pojawić nam się strona startowa, z której wybieramy **DNS Management** poprzed kliknięcie odpowiedniego przycisku **Get Started Now**. Tutaj dostaniemy pobieżnie kilka najważniejszych informacji czym w zasadzie jest Route53 \(aczkolwiek warto się z nimi zapoznać, potrwa to góra pół minuty\). Klikamy przycisk **Create Hosted Zone**. Jest to w pewnym sensie kontener, w którym będą przechowywane przeróżne rekordy DNS i inne ważne informacje dotyczące konkretnej domeny.
+
+{% hint style="danger" %}
+**Route53 nie jest objęty warstwą** _**free tier**_, dlatego musimy być gotowi na naliczenie drobnej opłaty. Generalnie przedstawia się to tak:
+
+* $0.50 za każdą strefę za miesiąc za pierwsze 25 stref
+* $0.10 za każdą kolejną za miesiąc
+{% endhint %}
+
+Jako że do wykonania tego tutoriala potrzebujemy stworzyć jedną strefę, do naszego miesięcznego rachunku doliczone zostanie pół dolara - więc myślę, że tragedii jako tako nie ma.
+
+Po kliknięciu na **Create Hosted Zone** musimy podać nazwę domeny, dla której tworzona jest dana strefa, czyli w moim przypadku będzie to np. _tomekrychtyk.pl_. Klikamy przycisk **Create**, czekamy kilka sekund i voila! Domyślnie Amazon utworzy dla nas da rekordy - **NS** i **SOA**. Nas interesuje w tym momencie przede wszystkim ten pierwszy - są to adresy serwerów DNS, na które przekierujemy naszą domenę w panelu kontrolnym dostawcy, u którego domenę rejestrowaliśmy. Powinniśmy zobaczyć cztery różne adresy. Kopiujemy je do notatnika, czy żeby mięc je pod ręką. Teraz musimy się teraz zalogować do panelu kontronego naszej domeny. W tym momencie ciężko mi powiedzieć dokładnie gdzie i jak się tam zalogować, bo trudno żeby każdy miał domenę u tego samego dostawcy. Generalnie chodzi o to, żeby po zalogowaniu się znaleźć ustawienia, bądź pewnie u niektórych będzie to nazwane "**Zaawansowane ustawienia DNS**" itp. W przypadku domeny.pl będąc na stronie głównej panelu klikam sobie na przycisk **Domeny**, a następnie przy konkretnej domenie mam przycisk **Zarządzaj**. I tutaj mam taką zakładę jak **Zewnętrzne serwery DNS**. To jest całe clue tego przedsięwzięcia - żeby znaleźć miejsce, gdzie możemy zdefiniować własne adresy serwerów. U mnie wygląda to mniej więcej tak:
+
+![](../.gitbook/assets/screenshot-from-2019-07-02-23-46-26.png)
+
+W te cztery pola przeklejam sobie odpowiednio każdy z czterech wygenerowanych przez Route53 adresów \(czasami może zdarzyć się, że nasz dostawca udostępni tylko dwa pola do podania DNS-ów - wówczas wybieramy pierwszy dwa, które pokazują się z rekordzie NS w Route53\).  
+Zapisujemy zmiany i to w zasadzie wszystko - pomyślnie przekierowaliśmy naszą domenę do Route53. Jest tylko jeden haczyk. Generalnie w zależności od dostawcy, jak też i bliżej nieokreślonych wyroków boskich, czas propagacji zmian DNS może potrwać do 24 godzin. Znaczy to mniej więcej tyle, że pomimo, że zapisaliśmy właśnie zmiany, przez kilka kolejnych godzin po wpisaniu adresu naszej domeny będzie on prowadził do serwerów dostawcy. W tym momencie nie pozostaje niestety nic innego jak tylko czekać.
 
 ### Elastic Load Balancer
 
