@@ -59,7 +59,7 @@ Zapisujemy zmiany i to w zasadzie wszystko - pomyślnie przekierowaliśmy naszą
 
 ### Elastic Load Balancer
 
-Może na początku wyjaśnię krótko czym jest **load balancer**. Jak sama nazwa wskazuje load balancer w pewnym sensie balansować obłożenie i dystrybuować je na różne serwery, instancje EC2, lambdy itd. Powiedzmy, że mamy kilka web serwerów i chcemy rozłożyć na nich po równo obciążenie. W takim właśnie przypadku świetnie spradzi się load balancer.
+Może na początku wyjaśnię krótko czym jest **load balancer**. Jak sama nazwa wskazuje load balancer będzie w pewnym sensie balansować obłożenie i dystrybuować je na różne serwery, instancje EC2, lambdy itd. Powiedzmy, że mamy kilka web serwerów i chcemy rozłożyć na nich po równo obciążenie. W takim właśnie przypadku świetnie sprawdzi się load balancer.
 
 {% hint style="info" %}
 Elastic Load Balancer występuje w trzech typach
@@ -80,5 +80,23 @@ Jeśli natomiast chcemy zabezpieczyć load balancer poprzez SSL, musimy w nastę
 
 ![](../.gitbook/assets/screenshot-from-2019-07-02-18-14-55.png)
 
-ACM to serwis ułatwiający zarządzanie certyfikatami SSL. Pozwala na uploadowanie już posiadanych przez nas certyfikatów, ale również całkiem za darmo możemy poprosić o jego wydanie. W tym celu klikamy na **Request a new certificate from ACM**. W nowej zakładce otworzy nam się formularz, w którym należy wpisać nazwę domeny, lub kilku domen, które chcemy objąć ochroną. Albo może to być po prostu _\*.nazwatwojejdomeny.pl_. Następnie klikamy Next, wybieramy **DNS Verification** \(zakładam, że masz dostęp do panelu kontrolnego dla Twojej domeny\) i klikamy **Review** oraz ostatecznie na **Confirm and Request**.
+ACM to serwis ułatwiający zarządzanie certyfikatami SSL. Pozwala na wgrywanie już posiadanych przez nas certyfikatów, ale również całkiem za darmo możemy poprosić o jego wydanie. W tym celu klikamy na **Request a new certificate from ACM**. W nowej zakładce otworzy nam się formularz, w którym należy wpisać nazwę domeny, lub kilku domen, które chcemy objąć ochroną. Albo może to być po prostu _\*.nazwatwojejdomeny.pl_. Następnie klikamy **Next**, wybieramy **DNS Verification** i klikamy **Review** oraz ostatecznie na **Confirm and Request**. W celu weryfikacji faktu, że jesteśmy administratorem danej domeny, zostaniemy poproszeni o utworzenie odpowiedniego rekordu **CNAME** w panelu zarządzania domeną - co w naszym przypadku, oznacza oczywiście już teraz **Route53**, a nie panel udostępniony przez dostawcę domeny. Skopiujmy zatem zarówno wartość znajdującą się w polu **Name** jak i **Value**:
+
+![](../.gitbook/assets/screenshot-from-2019-07-03-00-35-19.png)
+
+Przechodzimy teraz do **Route53**, do sekcji **Hosted Zones** i klikamy nazwę strefy, którą utworzyliśmy w podrozdziale "Route53", kilka akapitów wcześniej. Klikamy przycisk **Create Record Set**, w polu **Name** podajemy skopiowaną przed momentem nazwę pola **CNAME**, o którego utworzenie zostaliśmy poproszeni. Tak samo postępujemy z polem **Value**. Następnie jako Type wybieramy z listy właśnie "CNAME".
+
+{% hint style="info" %}
+Często popełniamy tutaj błędem jest wklejanie całej skopiowanej wartości **Name**. Zauważ, że Amazon automatycznie dokleja w polu Name "_.nazwatwojejdomeny.pl_", kiedy tworzysz CNAME, natomiast po skopiowaniu nazwy wartość ta też będzie prawdopodobnie wyglądała tak:
+
+**xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx**.nazwatwojejdomeny.pl
+
+Pamiętaj, aby do pola **Name** nowego rekordu CNAME wkleić tylko to co przed ".nazwatwojejdomeny.pl"
+{% endhint %}
+
+Po kilku minutach jeśli wrócisz do Amazon Certificate Manager, certyfikat powinien być zweryfikowany:
+
+![](../.gitbook/assets/screenshot-from-2019-07-03-00-46-32.png)
+
+
 
