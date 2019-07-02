@@ -2,7 +2,7 @@
 
 ### Wprowadzenie
 
-W tym mini-tutorialu dowiemy się, jak postawić w pełni funkcjonalny serwer WWW \(**Apache**\) przy użyciu **EC2** i **load balancera** oraz jak skonfigurować **Route53**, aby osługowało domenę zarejestrowaną u zewnętrznego dostawcy \(w tym przykładzie będzie to portal [domeny.pl](https://domeny.pl)\).
+W tym mini-tutorialu dowiemy się, jak postawić w pełni funkcjonalny serwer WWW \(**Apache**\) przy użyciu **EC2** i **load balancera** oraz jak skonfigurować **Route53**, aby osługował domenę zarejestrowaną u zewnętrznego dostawcy \(w tym przykładzie będzie to portal [domeny.pl](https://domeny.pl)\).
 
 ### Odpalamy EC2
 
@@ -54,5 +54,9 @@ Jeżeli nie dodałeś listenera do SSL, zobaczysz prawdopodobnie tegu typu ostrz
 
 ![](../.gitbook/assets/screenshot-from-2019-06-24-11-07-17.png)
 
+Jeśli natomiast chcemy zabezpieczyć load balancer poprzez SSL, musimy w następnym kroku podać, jaki certyfikat chcemy domyślnie używać. Tutaj opcji mamy kilka, z czego ja opiszę jedną z nich - zalecaną w przypadku kiedy nie posiadamy własnego cerytfikatu \(jeśli już takowy posiadasz możesz go po prostu przesłać do **Amazon Cerificate Manager'a** - druga opcja na screenie poniżej\).
 
+![](../.gitbook/assets/screenshot-from-2019-07-02-18-14-55.png)
+
+ACM to serwis ułatwiający zarządzanie certyfikatami SSL. Pozwala na uploadowanie już posiadanych przez nas certyfikatów, ale również całkiem za darmo możemy poprosić o jego wydanie. W tym celu klikamy na **Request a new certificate from ACM**. W nowej zakładce otworzy nam się formularz, w którym należy wpisać nazwę domeny, lub kilku domen, które chcemy objąć ochroną. Albo może to być po prostu _\*.nazwatwojejdomeny.pl_. Następnie klikamy Next, wybieramy **DNS Verification** \(zakładam, że masz dostęp do panelu kontrolnego dla Twojej domeny\) i klikamy **Review** oraz ostatecznie na **Confirm and Request**.
 
